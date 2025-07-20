@@ -1,0 +1,13 @@
+# Dependencies
+/node_modules
+/client/node_modules
+/server/node_modules
+
+# Production build
+/client/build
+
+# Environment variables
+/server/.env
+
+# OS-specific files
+.DS_Store
