@@ -1,12 +1,12 @@
 // client/src/utils/api.js
 import axios from 'axios';
 
+// client/src/utils/api.js
 const api = axios.create({
-  baseURL: 'http://localhost:4000/api',
-  headers: {
-    'Content-Type': 'application/json'
-  }
+  baseURL: 'https://expense-tracker-app-ey2g.onrender.com/api', // Use your new live URL
+  //...
 });
+
 
 // This is the crucial part:
 // It automatically adds the token from localStorage to the header of every request.
