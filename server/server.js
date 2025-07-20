@@ -12,7 +12,8 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+// Allow requests from any origin
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // --- Routes ---
