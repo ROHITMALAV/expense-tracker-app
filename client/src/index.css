@@ -5,26 +5,36 @@
 @tailwind utilities;
 
 @layer components {
-  /* --- A New Professional "Mint" Light Theme --- */
+  /* --- A Professional "Gradient Light" Theme --- */
 
   /* Main Layout & Typography */
   .app-container {
-    @apply bg-gray-50 text-gray-800 min-h-screen font-sans;
+    @apply bg-gray-100 text-gray-700 min-h-screen font-sans;
   }
   .sidebar {
-    @apply w-64 bg-white p-6 hidden md:flex flex-col justify-between border-r border-gray-200 fixed h-full z-50;
+    /* Base styles for mobile (hidden off-screen) */
+    @apply w-64 bg-white p-6 flex flex-col justify-between border-r border-gray-200 fixed h-full z-50 transform -translate-x-full transition-transform duration-300 ease-in-out;
+    /* Desktop styles (visible on screen) */
+    @apply md:translate-x-0;
+  }
+  .sidebar-open {
+    /* This class is added by JS to show the sidebar on mobile */
+    @apply translate-x-0;
+  }
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ease-in-out;
   }
   .sidebar-title {
-    @apply text-2xl font-bold text-emerald-600;
+    @apply text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500;
   }
   .nav-link {
     @apply flex items-center py-2 px-4 rounded-lg text-gray-500 font-medium hover:bg-gray-100 hover:text-gray-800 transition-colors;
   }
   .nav-link-active {
-    @apply flex items-center py-2 px-4 rounded-lg bg-emerald-50 text-emerald-600 font-semibold;
+    @apply flex items-center py-2 px-4 rounded-lg bg-blue-500/10 text-blue-600 font-semibold;
   }
   .content-wrapper {
-    @apply flex-1 md:ml-64;
+    @apply flex-1 md:ml-64; /* Offset by sidebar width on desktop */
   }
   .main-content {
     @apply p-4 md:p-8;
@@ -33,29 +43,38 @@
     @apply flex justify-between items-center mb-8;
   }
   .main-title {
-    @apply text-3xl font-bold text-gray-900;
+    @apply text-3xl font-bold text-gray-800;
   }
   .section-title {
-    @apply text-xl font-semibold mb-4 text-gray-900;
+    @apply text-xl font-semibold mb-4 text-gray-800;
   }
 
   /* Navbar */
   .navbar {
-    @apply bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-40 border-b border-gray-200;
+    @apply bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-30 border-b border-gray-200;
   }
   .navbar-container {
     @apply container mx-auto flex items-center justify-between md:justify-end p-4 h-16;
   }
-  .navbar-profile .profile-button {
-    @apply rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-transform hover:scale-110;
+  .navbar-search {
+    @apply flex-1 hidden md:block;
+  }
+  .navbar-profile {
+    /* For future use */
+  }
+  .profile-button {
+    @apply rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform hover:scale-110;
   }
   .mobile-menu-button {
     @apply p-2 rounded-md text-gray-500 hover:bg-gray-100;
   }
 
   /* Summary Cards */
+  .summary-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6 mb-8;
+  }
   .summary-card {
-    @apply bg-white p-6 rounded-xl border border-gray-200 shadow-sm;
+    @apply bg-white p-6 rounded-xl border border-gray-200 shadow-md transition-all hover:shadow-lg hover:-translate-y-1;
   }
   .summary-card-title {
     @apply text-gray-500 text-sm font-medium;
@@ -66,33 +85,35 @@
 
   /* Forms & Inputs */
   .form-container {
-    @apply bg-white p-4 rounded-xl grid grid-cols-1 md:grid-cols-5 gap-4 items-end border border-gray-200 shadow-sm;
+    @apply bg-white p-4 rounded-xl grid grid-cols-1 md:grid-cols-5 gap-4 items-end border border-gray-200 shadow-md;
   }
   .form-label {
     @apply block text-gray-600 text-sm font-medium mb-1;
   }
   .form-input {
-    @apply w-full p-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900;
+    @apply w-full p-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900;
   }
   .form-select {
-    @apply w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900;
+    @apply w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900;
   }
   
   /* Buttons */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-semibold transition-all duration-300;
+  }
   .btn-primary {
-    @apply w-full bg-emerald-600 text-white p-2.5 rounded-lg hover:bg-emerald-700 font-semibold shadow-sm transition-all;
+    @apply w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-2.5 hover:shadow-lg hover:from-blue-700 hover:to-cyan-600;
   }
   .btn-success {
-    @apply bg-emerald-500 text-white hover:bg-emerald-600 px-4 py-2 rounded-lg font-semibold transition-colors;
+    @apply bg-emerald-500 text-white hover:bg-emerald-600;
   }
   .btn-secondary {
-    @apply bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-2 rounded-lg font-semibold transition-colors;
+    @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
   }
   .btn-logout {
     @apply w-full flex items-center justify-center p-3 rounded-lg text-red-500 font-semibold hover:bg-red-50;
   }
-  
-  /* Pagination */
+    /* Pagination */
   .pagination-container {
     @apply flex justify-center items-center p-4 mt-4;
   }
@@ -100,7 +121,7 @@
     @apply px-4 py-2 mx-1 rounded-lg font-semibold transition-colors;
   }
   .pagination-btn-active {
-    @apply bg-emerald-600 text-white shadow-md;
+    @apply bg-blue-600 text-white shadow-md;
   }
   .pagination-btn-inactive {
     @apply bg-white text-gray-700 hover:bg-gray-200;
@@ -119,6 +140,9 @@
   .auth-title {
     @apply text-2xl font-bold text-center text-gray-800 mb-6;
   }
+  .form-group {
+    @apply mb-4;
+  }
   .auth-error {
     @apply bg-red-100 text-red-700 p-3 rounded-lg mb-4 text-center;
   }
@@ -126,7 +150,7 @@
     @apply text-center text-gray-600 mt-6;
   }
   .auth-link {
-    @apply font-semibold text-emerald-600 hover:underline;
+    @apply font-semibold text-blue-600 hover:underline;
   }
 
   /* Profile Page */
@@ -134,7 +158,7 @@
     @apply bg-white p-8 rounded-xl shadow-md text-center;
   }
   .profile-avatar {
-    @apply w-24 h-24 bg-emerald-600 text-white text-5xl font-bold rounded-full mx-auto flex items-center justify-center mb-4;
+    @apply w-24 h-24 bg-blue-600 text-white text-5xl font-bold rounded-full mx-auto flex items-center justify-center mb-4;
   }
   .profile-name {
     @apply text-2xl font-bold text-gray-800;
@@ -148,19 +172,19 @@
 
   /* Transactions List */
   .transactions-container {
-    @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+    @apply bg-white rounded-xl border border-gray-200 shadow-md;
   }
   .transactions-header {
-    @apply text-xl font-semibold text-gray-900 p-4 border-b border-gray-200;
+    @apply text-xl font-semibold text-gray-800 p-4 border-b border-gray-200;
   }
   .transaction-item {
     @apply border-b border-gray-200 last:border-b-0;
   }
   .transaction-row {
-    @apply grid grid-cols-2 md:grid-cols-5 items-center p-4 gap-4;
+    @apply flex items-center justify-between p-4 hover:bg-gray-50/70 transition-colors duration-150;
   }
   .transaction-row-edit {
-    @apply p-4 bg-emerald-50;
+    @apply flex items-center justify-between p-4 bg-blue-50;
   }
   .transaction-indicator {
     @apply w-1.5 h-10 rounded-full mr-4;
@@ -172,13 +196,16 @@
     @apply bg-rose-500;
   }
   .transaction-details {
-    @apply flex items-center;
+    @apply flex items-center flex-grow;
   }
   .transaction-description {
     @apply font-bold text-lg text-gray-800 capitalize;
   }
   .transaction-category {
     @apply text-sm text-gray-500;
+  }
+  .transaction-amount-details {
+    @apply text-right;
   }
   .transaction-amount {
     @apply font-bold text-lg;
@@ -190,16 +217,16 @@
     @apply text-rose-600;
   }
   .transaction-date {
-    @apply text-sm text-gray-500;
+    @apply text-xs text-gray-500;
   }
   .transaction-actions {
-    @apply flex items-center space-x-3;
+    @apply flex items-center ml-6 space-x-3;
   }
   .action-btn {
     @apply text-gray-400 transition-colors duration-150;
   }
   .action-btn-edit {
-    @apply hover:text-emerald-500;
+    @apply hover:text-blue-500;
   }
   .action-btn-delete {
     @apply hover:text-rose-500;
