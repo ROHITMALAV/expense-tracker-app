@@ -1,7 +1,25 @@
 // client/src/components/About.js
-import React from 'react';
+import React, { useState } from 'react';
 
 const About = () => {
+  const [feedback, setFeedback] = useState({ name: '', email: '', message: '' });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFeedback(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // In a real application, you would send this data to a backend endpoint.
+    // For now, we'll simulate a successful submission.
+    console.log('Feedback Submitted:', feedback);
+    setIsSubmitted(true);
+    setFeedback({ name: '', email: '', message: '' });
+    setTimeout(() => setIsSubmitted(false), 5000); // Reset after 5 seconds
+  };
+
   return (
     <div>
       <header className="main-header">
@@ -48,13 +66,55 @@ const About = () => {
           </div>
         </div>
 
-        {/* Meet the Team Section */}
+        {/* Feedback Form Section */}
+        <div className="mt-12">
+            <h3 className="text-2xl font-bold text-center text-gray-800 mb-6">We'd Love Your Feedback</h3>
+            <div className="max-w-2xl mx-auto">
+                {isSubmitted ? (
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg text-center" role="alert">
+                        <strong className="font-bold">Thank you!</strong>
+                        <span className="block sm:inline"> Your feedback has been received.</span>
+                    </div>
+                ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label htmlFor="name" className="form-label">Your Name</label>
+                                <input type="text" name="name" id="name" value={feedback.name} onChange={handleChange} className="form-input" required />
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="form-label">Your Email</label>
+                                <input type="email" name="email" id="email" value={feedback.email} onChange={handleChange} className="form-input" required />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="message" className="form-label">Message</label>
+                            <textarea name="message" id="message" rows="4" value={feedback.message} onChange={handleChange} className="form-input" required></textarea>
+                        </div>
+                        <div className="text-right">
+                            <button type="submit" className="btn btn-primary w-auto">Submit Feedback</button>
+                        </div>
+                    </form>
+                )}
+            </div>
+        </div>
+
+        {/* --- UPDATED: Meet the Team Section --- */}
         <div className="text-center mt-12">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Meet the Developer</h3>
-            <div className="inline-block">
-                <img src="https://placehold.co/128x128/000000/FFFFFF?text=RM" alt="Rohit Malav" className="rounded-full mx-auto mb-4"/>
-                <h4 className="text-xl font-semibold">Rohit Malav</h4>
-                <p className="text-gray-500">Full-Stack Developer</p>
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">Meet the Team</h3>
+            <div className="flex justify-center items-center gap-8 md:gap-16">
+                {/* Rohit Malav */}
+                <div className="inline-block">
+                    <img src="https://placehold.co/128x128/000000/FFFFFF?text=RM" alt="Rohit Malav" className="rounded-full mx-auto mb-4"/>
+                    <h4 className="text-xl font-semibold">Rohit Malav</h4>
+                    <p className="text-gray-500">Full-Stack Developer</p>
+                </div>
+                {/* Sanjay Mishra */}
+                <div className="inline-block">
+                    <img src="https://placehold.co/128x128/000000/FFFFFF?text=SM" alt="Sanjay Mishra" className="rounded-full mx-auto mb-4"/>
+                    <h4 className="text-xl font-semibold">Sanjay Mishra</h4>
+                    <p className="text-gray-500">Penetration Tester</p>
+                </div>
             </div>
         </div>
       </div>
