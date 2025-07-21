@@ -29,12 +29,13 @@ const Navbar = ({ user, onProfileClick, onMenuClick }) => {
             <h1 className="sidebar-title">Expense Pro</h1>
         </div>
 
-        {/* Spacer to push profile icon to the right */}
-        <div className="navbar-search"></div>
+        {/* Spacer to push profile icon to the right on desktop */}
+        <div className="flex-grow hidden md:block"></div>
 
+        {/* Right side: Profile Icon */}
         <div className="navbar-profile">
           <button onClick={onProfileClick} className="profile-button">
-            <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+            <div className="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">
               {initials}
             </div>
           </button>
