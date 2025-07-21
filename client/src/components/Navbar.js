@@ -9,13 +9,29 @@ const getInitials = (name = '') => {
   return name.substring(0, 2).toUpperCase();
 };
 
-const Navbar = ({ user, onProfileClick }) => {
+const Navbar = ({ user, onProfileClick, onMenuClick }) => {
   const initials = getInitials(user?.name);
 
   return (
     <header className="navbar">
       <div className="navbar-container">
+        {/* Hamburger Menu Button - Mobile Only */}
+        <div className="md:hidden">
+          <button onClick={onMenuClick} className="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Project Name - Mobile Only */}
+        <div className="md:hidden">
+            <h1 className="sidebar-title">Expense Pro</h1>
+        </div>
+
+        {/* Spacer to push profile icon to the right */}
         <div className="navbar-search"></div>
+
         <div className="navbar-profile">
           <button onClick={onProfileClick} className="profile-button">
             <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
