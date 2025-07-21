@@ -1,5 +1,6 @@
 // client/src/components/Login.js
 import React, { useState } from 'react';
+import api from '../utils/api'; // Import the api utility
 
 const Login = ({ setCurrentPage, onLoginSuccess }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -12,19 +13,11 @@ const Login = ({ setCurrentPage, onLoginSuccess }) => {
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        onLoginSuccess(data.token);
-      } else {
-        setError(data.msg || 'Login failed');
-      }
+      // Use the 'api' utility which has the correct live URL
+      const res = await api.post('/auth/login', { email, password });
+      onLoginSuccess(res.data.token);
     } catch (err) {
-      setError('Server error');
+      setError(err.response?.data?.msg || 'Login failed. Please check your credentials.');
     }
   };
 

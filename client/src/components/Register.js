@@ -1,5 +1,6 @@
 // client/src/components/Register.js
 import React, { useState } from 'react';
+import api from '../utils/api'; // Import the api utility
 
 const Register = ({ setCurrentPage, onLoginSuccess }) => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -12,19 +13,11 @@ const Register = ({ setCurrentPage, onLoginSuccess }) => {
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        onLoginSuccess(data.token);
-      } else {
-        setError(data.msg || 'Registration failed');
-      }
+      // Use the 'api' utility which has the correct live URL
+      const res = await api.post('/auth/register', { name, email, password });
+      onLoginSuccess(res.data.token);
     } catch (err) {
-      setError('Server error');
+      setError(err.response?.data?.msg || 'Registration failed. Please try again.');
     }
   };
 
