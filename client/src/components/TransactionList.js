@@ -115,7 +115,8 @@ const TransactionList = ({ transactions, setTransactions, onDeleteRequest }) => 
     const [editingId, setEditingId] = useState(null);
     const [editFormData, setEditFormData] = useState({ description: '', amount: '', type: '', category: '' });
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(10);
+    // --- UPDATED: Changed items per page from 10 to 5 ---
+    const [itemsPerPage] = useState(5);
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
