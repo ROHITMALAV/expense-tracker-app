@@ -12,7 +12,14 @@
     @apply bg-gray-100 text-gray-700 min-h-screen font-sans;
   }
   .sidebar {
-    @apply w-64 bg-white p-6 flex flex-col justify-between border-r border-gray-200 fixed h-full z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out;
+    /* Base styles for mobile (hidden off-screen) */
+    @apply w-64 bg-white p-6 flex flex-col justify-between border-r border-gray-200 fixed h-full z-50 transform -translate-x-full transition-transform duration-300 ease-in-out;
+    /* Desktop styles (visible on screen) */
+    @apply md:translate-x-0;
+  }
+  .sidebar-open {
+    /* This class is added by JS to show the sidebar on mobile */
+    @apply translate-x-0;
   }
   .sidebar-overlay {
     @apply fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ease-in-out;
@@ -47,10 +54,10 @@
     @apply bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-30 border-b border-gray-200;
   }
   .navbar-container {
-    @apply container mx-auto flex items-center justify-between p-4 h-16;
+    @apply container mx-auto flex items-center justify-between md:justify-end p-4 h-16;
   }
   .navbar-search {
-    @apply flex-1;
+    @apply flex-1 hidden md:block;
   }
   .navbar-profile {
     /* For future use */

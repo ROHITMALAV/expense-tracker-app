@@ -27,12 +27,13 @@ const Sidebar = ({ currentPage, setCurrentPage, onLogout, isOpen, onClose }) => 
         onClick={onClose}
       ></div>
 
-      <aside className={`sidebar ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* The 'sidebar-open' class is toggled by the isOpen prop */}
+      <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
         <div>
           <div className="flex justify-between items-center mb-10">
             <h1 className="sidebar-title">Expense Pro</h1>
             {/* Close button for mobile */}
-            <button onClick={onClose} className="md:hidden text-gray-400 hover:text-white">
+            <button onClick={onClose} className="md:hidden text-gray-400 hover:text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
