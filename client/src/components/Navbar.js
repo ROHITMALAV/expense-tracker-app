@@ -16,21 +16,14 @@ const Navbar = ({ user, onProfileClick, onMenuClick }) => {
     <header className="navbar">
       <div className="navbar-container">
         {/* Hamburger Menu Button - Mobile Only */}
-        <div className="md:hidden">
-          <button onClick={onMenuClick} className="mobile-menu-button">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+        <button onClick={onMenuClick} className="mobile-menu-button">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
 
-        {/* Project Name - Mobile Only */}
-        <div className="md:hidden">
-            <h1 className="sidebar-title">Expense Pro</h1>
-        </div>
-
-        {/* Spacer to push profile icon to the right on desktop */}
-        <div className="flex-grow hidden md:block"></div>
+        {/* Spacer to push profile icon to the right */}
+        <div className="flex-grow"></div>
 
         {/* Right side: Profile Icon */}
         <div className="navbar-profile">
