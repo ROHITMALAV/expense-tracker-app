@@ -25,7 +25,6 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authPage, setAuthPage] = useState('login');
   const [user, setUser] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const undoTimeoutRef = useRef(null);
 
@@ -176,19 +175,9 @@ function App() {
   return (
     <>
       <div className="app-container">
-        <Sidebar 
-            currentPage={currentPage} 
-            setCurrentPage={setCurrentPage} 
-            onLogout={handleLogout}
-            isOpen={isSidebarOpen}
-            onClose={() => setIsSidebarOpen(false)}
-        />
+        <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={handleLogout} />
         <div className="content-wrapper">
-          <Navbar 
-            user={user} 
-            onProfileClick={() => setCurrentPage('profile')} 
-            onMenuClick={() => setIsSidebarOpen(true)}
-          />
+          <Navbar user={user} onProfileClick={() => setCurrentPage('profile')} />
           <main className="main-content">
             {renderPage()}
           </main>
