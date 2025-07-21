@@ -112,7 +112,7 @@ const About = () => {
                 {/* Sanjay Mishra */}
                 <div className="inline-block">
                     <img src="https://placehold.co/128x128/000000/FFFFFF?text=SM" alt="Sanjay Mishra" className="rounded-full mx-auto mb-4"/>
-                    <h4 className="text-xl font-semibold">Sanjay Mishra</h4>
+                    <h4 className="text-xl font-semibold">Sanjay Mishra(RANDI)</h4>
                     <p className="text-gray-500">Penetration Tester</p>
                 </div>
             </div>
